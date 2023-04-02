@@ -22,10 +22,12 @@ class MainActivity : AppCompatActivity() {
 
     // Game state
     private var gameStarted = false
+
+    // Timer
     private lateinit var countDownTimer: CountDownTimer
     private var initialCountDown: Long = 10000
     private var countDownInterval: Long = 1000
-    private var timeLeft = 6
+    private var timeLeft = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             restoreGame()
             // Otherwise, just start a new game
         } else {
-        startGame()
+        resetGame()
         }
     }
 
@@ -81,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         score = 0
 
         val initialScore = getString(R.string.your_score, score)
-        gameScoreTextView.text = initialScore // broken
+        gameScoreTextView.text = initialScore
 
         val initialTimeLeft = getString(R.string.time_left, 60)
         timeLeftTextView.text = initialTimeLeft
