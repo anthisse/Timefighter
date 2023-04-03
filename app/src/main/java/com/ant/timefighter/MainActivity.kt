@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
 
     // Timer
     private lateinit var countDownTimer: CountDownTimer
-    private var initialCountDown: Long = 10000
+    private var initialCountDown: Long = 15000
     private var countDownInterval: Long = 1000
-    private var timeLeft = 10
+    private var timeLeft = 15
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         val initialScore = getString(R.string.your_score, score)
         gameScoreTextView.text = initialScore
 
-        val initialTimeLeft = getString(R.string.time_left, 60)
+        val initialTimeLeft = getString(R.string.time_left, 15)
         timeLeftTextView.text = initialTimeLeft
 
         countDownTimer = object : CountDownTimer(initialCountDown,
@@ -121,19 +121,17 @@ class MainActivity : AppCompatActivity() {
         val restoredTime = getString(R.string.time_left, timeLeft)
         timeLeftTextView.text = restoredTime
 
-
         countDownTimer = object : CountDownTimer(
             (timeLeft *
-                    1000).toLong(), countDownInterval
+                    1000).toLong(), countDownInterval) {
 
-        ) {
             override fun onTick(millisUntilFinished: Long) {
                 timeLeft = millisUntilFinished.toInt() / 1000
                 val timeLeftString = getString(
-                    R.string.time_left,
-                    timeLeft
-                )
+                    R.string.time_left, timeLeft)
                 timeLeftTextView.text = timeLeftString
+                Log.d(TAG, "Tick! time left is $timeLeft")
+
             }
 
             override fun onFinish() {
